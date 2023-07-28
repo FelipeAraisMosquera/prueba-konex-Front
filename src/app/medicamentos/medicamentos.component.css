@@ -1,0 +1,17 @@
+.centered{
+    text-align: center;
+}
+
+
+.enviar{
+    width: 10%;
+    padding: 15px 5px;
+    font-size: 18px;
+    font-weight: bold;/*negrilla*/
+    color: white;
+    background: orange;
+    border: none;
+    border-radius: 5px;
+    transition: 1s all;/*para que aplique la transición para todas las características*/
+    cursor: pointer;
+}

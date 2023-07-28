@@ -3,7 +3,8 @@ import axios, { AxiosResponse } from 'axios';
 import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
-import { EditVentaComponent } from '../edit-venta/edit-venta.component';
+import { EditMedicamentoComponent } from '../edit-medicamento/edit-medicamento.component';
+import { CrearMedicamentoComponent } from '../crear-medicamento/crear-medicamento.component';
 
 @Component({
   selector: 'app-medicamentos',
@@ -17,11 +18,17 @@ export class MedicamentosComponent {
 
   medicamentos!: Array<any>;
   title = 'Listado de medicamentos';
-  id: number | null = null;;
-  cantidad: number | null = null;
-  medicamentoId: number | null = null;
-  valorUnitario: number = 0;
+  id: number | null = null;
+  nombre: string = '';
+  laboratorio: string = '';
+  fechaFabricación: Date | null = null;
+  fechaVencimiento: Date | null = null;
+  cantidadStock: number | null = null;
+  valorUnitario: number | null = null;
   dataSource = new MatTableDataSource();
+
+    
+
 
   constructor(private dialog: MatDialog) { }
 
@@ -96,49 +103,35 @@ export class MedicamentosComponent {
   
   
 
-
-  agregarMedicamento(){
-      axios.post('http://localhost:8080/venta', [
-      {
-        cantidad: this.cantidad,
-        medicamentoId: this.medicamentoId
-      }
-    ])
-      .then((Response: AxiosResponse)=> {
-        console.log(Response.data);
-        this.consultarMedicamento();
-      })
-      .catch((error: any) => {
-        console.log('No Funciona, hay algun error', error);
-      });
-  }
+openDialogCreate() {
+console.log("entro");
+  const config = {
+    
+    data: {
+      
+      message:  'agregar Medicamento',
+      error: 'Error'
+      
+    }
+  };
+  const dialogRef = this.dialog.open(CrearMedicamentoComponent, config);
+  dialogRef.afterClosed().subscribe(result => {
+    this.consultarMedicamento();
+  });
+}
 
  
-  actualizarVenta(){
-    axios.put('http://localhost:8080/venta', [
-    {
-      cantidad: this.cantidad,
-      valorUnitario: this.valorUnitario
-    }
-  ])
-    .then((Response: AxiosResponse)=> {
-      console.log(Response.data);
-      this.consultarMedicamento();
-    })
-    .catch((error: any) => {
-      console.log('No Funciona, hay algun error', error);
-    });
-}
+
   
 openDialog(element: any): void {
 
   const config = {
     data: {
-      message: element ? 'Editar Cliente' : 'Error',
+      message: element ? 'Editar Medicamento' : 'Error',
       content: element
     }
   };
-  const dialogRef = this.dialog.open(EditVentaComponent, config);
+  const dialogRef = this.dialog.open(EditMedicamentoComponent, config);
   dialogRef.afterClosed().subscribe(result => {
     this.consultarMedicamento();
   });

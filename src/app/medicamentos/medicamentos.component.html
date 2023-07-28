@@ -1,44 +1,20 @@
 <div class="container">
   <div class="col">
-    <h3 class="centered">{{ title }}</h3>
+    <h1 class="centered">{{ title }}</h1>
   </div>
-  <hr />
-
-  <form class="row" (submit)="agregarMedicamento()">
-    <div class="form-group col-md-2">
-      <button type="submit" class="btn btn-warning">Agregar</button>
-    </div>
-    <div class="form-group col-md-2">
-      <input
-        type="text"
-        name="medicamentoId"
-        id="medicamentoId"
-        placeholder="medicamentoId"
-        class="form-control"
-        [(ngModel)]="medicamentoId"
-      />
-    </div>
-    <div class="form-group col-md-2">
-      <input
-        type="text"
-        name="cantidad"
-        id="cantidad"
-        placeholder="cantidad"
-        class="form-control"
-        [(ngModel)]="cantidad"
-      />
-    </div>
-  </form>
 
   <hr />
   <form class="row">
-    <div class="form-group col-md-2">
-      <button
+    <div class="form-group col-md-1">
+      <button mat-button type="button" class="enviar" (click)="openDialogCreate()">Agregar</button>
+    </div>
+    <div class="form-group col-md-1">
+      <button 
+      class="enviar"
+      mat-button
         type="submit"
-        class="btn btn-primary"
-        (click)="consultarYBuscarMedicamentos()"
-      >
-        Consultar medicamentos
+        (click)="consultarYBuscarMedicamentos()"      >
+        Listar
       </button>
     </div>
     <div class="form-group col-md-2">
@@ -73,7 +49,7 @@
           <td>{{ medicamento.id }}</td>
           <td>{{ medicamento.cantidadStock }}</td>
           <td>{{ medicamento.fechaFabricacion }}</td>
-          <td>{{ medicamento["fechaVencimiento"] }}</td>
+          <td>{{ medicamento.fechaVencimiento }}</td>
           <td>{{ medicamento["laboratorio"] }}</td>
           <td>{{ medicamento.nombre }}</td>
           <td>{{ medicamento.valorUnitario }}</td>
@@ -92,8 +68,7 @@
                 mat-mini-fab
                 color="primary"
                 aria-label="Editar"
-                (click)="openDialog(medicamento)"
-              >
+                (click)="openDialog(medicamento)">
                 <mat-icon>edit</mat-icon>
               </button>
             </div>

@@ -114,7 +114,7 @@ openDialog(element: any): void {
 
   const config = {
     data: {
-      message: element ? 'Editar Cliente' : 'Error',
+      message: element ? 'Editar Venta' : 'Error',
       content: element
     }
   };

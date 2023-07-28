@@ -1,20 +1,19 @@
-
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit-medicamento',
-  templateUrl: './edit-medicamento.component.html',
-  styleUrls: ['./edit-medicamento.component.css']
+  selector: 'app-crear-medicamento',
+  templateUrl: './crear-medicamento.component.html',
+  styleUrls: ['./crear-medicamento.component.css']
 })
-export class EditMedicamentoComponent {
+export class CrearMedicamentoComponent {
 
+  
 
-
-  constructor( private fb: FormBuilder, public dialog: MatDialogRef<EditMedicamentoComponent>,
+  constructor( private fb: FormBuilder, public dialog: MatDialogRef<CrearMedicamentoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any ) {  }
 
   spinner: boolean = false;
@@ -22,7 +21,17 @@ export class EditMedicamentoComponent {
   form!: FormGroup;
   cities!: Array<any>;
 
-  
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      nombre: ['', [Validators.required]],
+      laboratorio: ['', Validators.required],
+      fechaFabricacion: ['', Validators.required],
+      fechaVencimiento: ['', Validators.required],
+      cantidadStock: ['', Validators.required],
+      valorUnitario: ['', Validators.required],
+    });
+    this.initValuesForm();
+  }
 
   private initValuesForm(): void {    
     this.form.patchValue({
@@ -54,7 +63,7 @@ export class EditMedicamentoComponent {
         if (this.form.valid) {
           this.spinner = true;
           
-          axios.put(`http://localhost:8080/medicamentos/${this.element.id}`, {
+          axios.post(`http://localhost:8080/medicamentos`, {
             nombre: this.form.value.nombre,
             laboratorio: this.form.value.laboratorio,
             fechaFabricacion: this.form.value.fechaFabricacion,
@@ -64,12 +73,12 @@ export class EditMedicamentoComponent {
 
           }).then(() => {
             this.dialog.close(true);
-            Swal.fire('El medicamento se ha actulizo con exito');
+            Swal.fire('El medicamento se ha creado con exito');
             this.spinner = false;
           })
           .catch((error: any) => {
             console.log(error);
-            Swal.fire('Problema al actualizar', error);
+            Swal.fire('Problema al Crear', error);
           });
          
         } else {
@@ -87,4 +96,5 @@ export class EditMedicamentoComponent {
       }
     })
   }
+
 }

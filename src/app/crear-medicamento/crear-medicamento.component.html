@@ -1,0 +1,187 @@
+<mat-dialog-content class="dialog-content">
+    <mat-card class="formCard">
+      <div class="elementsformCard">
+        <h1>Crear Medicamento</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="forms-repeat">
+          <div class="inputsRegister">
+            <div>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Nombre</mat-label>
+                <input matInput type="text" formControlName="nombre" />
+              </mat-form-field>
+              <div
+                class="alert-danger"
+                *ngIf="
+                  form.get('nombre')?.errors &&
+                  (form.get('nombre')?.dirty || form.get('nombre')?.touched)
+                "
+              >
+                <div
+                  class="container-error-message"
+                  *ngIf="form.get('nombre')?.hasError('required')"
+                >
+                  El campo Nombre es requerido
+                </div>
+              </div>
+            </div>
+            <div>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Laboratorio</mat-label>
+                <input matInput type="text" formControlName="laboratorio" />
+              </mat-form-field>
+              <div
+                class="alert-danger"
+                *ngIf="
+                  form.get('laboratorio')?.errors &&
+                  (form.get('laboratorio')?.dirty ||
+                    form.get('laboratorio')?.touched)
+                "
+              >
+                <div
+                  class="container-error-message"
+                  *ngIf="form.get('laboratorio')?.hasError('required')"
+                >
+                  El campo Laboratorio es requerido
+                </div>
+              </div>
+            </div>
+            <div>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Fecha Fabricacion</mat-label>
+                <input
+                  matInput
+                  type="fechaFabricacion"
+                  formControlName="fechaFabricacion"
+                />
+              </mat-form-field>
+              <div
+                class="alert-danger"
+                *ngIf="
+                  form.get('fechaFabricacion')?.errors &&
+                  (form.get('fechaFabricacion')?.dirty ||
+                    form.get('fechaFabricacion')?.touched)
+                "
+              >
+                <div
+                  class="container-error-message"
+                  *ngIf="form.get('fechaFabricacion')?.hasError('required')"
+                >
+                  El campo Fecha Fabricacion es requerido
+                </div>
+              </div>
+            </div>
+            <div>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Fecha Vencimiento</mat-label>
+                <input
+                  matInput
+                  type="fechaVencimiento"
+                  formControlName="fechaVencimiento"
+                />
+              </mat-form-field>
+              <div
+                class="alert-danger"
+                *ngIf="
+                  form.get('fechaVencimiento')?.errors &&
+                  (form.get('fechaVencimiento')?.dirty ||
+                    form.get('fechaVencimiento')?.touched)
+                "
+              >
+                <div
+                  class="container-error-message"
+                  *ngIf="form.get('fechaVencimiento')?.hasError('required')"
+                >
+                  El campo Fecha Vencimiento es requerido
+                </div>
+              </div>
+            </div>
+            <div>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Cantidad Stock</mat-label>
+                <input
+                  matInput
+                  type="cantidadStock"
+                  formControlName="cantidadStock"
+                />
+              </mat-form-field>
+              <div
+                class="alert-danger"
+                *ngIf="
+                  form.get('cantidadStock')?.errors &&
+                  (form.get('cantidadStock')?.dirty ||
+                    form.get('cantidadStock')?.touched)
+                "
+              >
+                <div
+                  class="container-error-message"
+                  *ngIf="form.get('cantidadStock')?.hasError('required')"
+                >
+                  El campo Cantidad Stock es requerido
+                </div>
+              </div>
+            </div>
+            <div>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Valor Unitario</mat-label>
+                <input
+                  matInput
+                  type="valorUnitario"
+                  formControlName="valorUnitario"
+                />
+              </mat-form-field>
+              <div
+                class="alert-danger"
+                *ngIf="
+                  form.get('valorUnitario')?.errors &&
+                  (form.get('valorUnitario')?.dirty ||
+                    form.get('valorUnitario')?.touched)
+                "
+              >
+                <div
+                  class="container-error-message"
+                  *ngIf="form.get('valorUnitario')?.hasError('required')"
+                >
+                  El campo Cantidad Stock es requerido
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="buttonsModify">
+              <div class="buttonModify">
+                <button
+                  *ngIf="!spinner"
+                  type="submit"
+                  class="btn"
+                  mat-stroked-button
+                  color="primary"
+                  [disabled]="!form.valid"
+                >
+                  Modificar
+                </button>
+                <button *ngIf="spinner" class="btn" mat-stroked-button>
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="sr-only"> Modificando...</span>
+                </button>
+              </div>
+              <div class="buttonCancel">
+                <button
+                  class="btn"
+                  type="button"
+                  mat-stroked-button
+                  (click)="cancelModify()"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </mat-card>
+  </mat-dialog-content>
+  

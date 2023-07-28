@@ -16,6 +16,7 @@ import { EditVentaComponent } from './edit-venta/edit-venta.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { EditMedicamentoComponent } from './edit-medicamento/edit-medicamento.component';
+import { CrearMedicamentoComponent } from './crear-medicamento/crear-medicamento.component';
 
 
 
@@ -32,6 +33,7 @@ import { EditMedicamentoComponent } from './edit-medicamento/edit-medicamento.co
     MedicamentosComponent,
     EditVentaComponent,
     EditMedicamentoComponent,
+    CrearMedicamentoComponent,
  
   ],
   imports: [
