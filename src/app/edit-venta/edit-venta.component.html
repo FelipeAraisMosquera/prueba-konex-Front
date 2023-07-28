@@ -1,0 +1,51 @@
+<mat-dialog-content class="dialog-content">
+    <mat-card class="formCard">
+        <div class="elementsformCard">
+            <h1>Editar Cliente</h1>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" class="forms-repeat">
+                <div class="inputsRegister">
+                    <div>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Cantidad</mat-label>
+                            <input matInput type="number" formControlName="cantidad">
+                        </mat-form-field>
+                        <div class="alert-danger"
+                            *ngIf="form.get('cantidad')?.errors && (form.get('cantidad')?.dirty || form.get('cantidad')?.touched)">
+                            <div class="container-error-message" *ngIf="form.get('cantidad')?.hasError('required')">
+                                El campo cantidad es requerido
+                            </div>
+                       </div>                    
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Valor Unitaria</mat-label>
+                            <input matInput type="number" formControlName="valorUnitario">
+                        </mat-form-field>
+                        <div class="alert-danger"
+                            *ngIf="form.get('valorUnitario')?.errors && (form.get('valorUnitario')?.dirty || form.get('valorUnitario')?.touched)">
+                            <div class="container-error-message" *ngIf="form.get('valorUnitario')?.hasError('required')">
+                                El campo valor Unitario es requerido
+                            </div>
+                       </div>                    
+                    </div>
+                </div>    
+                <div>
+                    <div class="buttonsModify">
+                        <div class="buttonModify">
+                            <button *ngIf="!spinner" type="submit" class="btn" mat-stroked-button color="primary"
+                                [disabled]="!form.valid">Modificar</button>
+                            <button *ngIf="spinner" class="btn" mat-stroked-button>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <span class="sr-only"> Modificando...</span>
+                            </button>
+                        </div>
+                        <div class="buttonCancel">
+                            <button class="btn" type="button" mat-stroked-button
+                                (click)=cancelModify()>Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+</mat-dialog-content>

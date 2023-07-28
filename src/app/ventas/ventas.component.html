@@ -1,73 +1,72 @@
 <div class="container">
-    <div class="col">
-      <h3 class="centered">{{ title }}</h3>
+  <div class="col">
+    <h3 class="centered">{{ title }}</h3>
+  </div>
+  <hr />
+
+  <form class="row" (submit)="agregarVenta()">
+    <div class="form-group col-md-2">
+      <button type="submit" class="btn btn-warning">Agregar</button>
     </div>
-    <hr/>
+    <div class="form-group col-md-2">
+      <input
+        type="text"
+        name="medicamentoId"
+        id="medicamentoId"
+        placeholder="medicamentoId"
+        class="form-control"
+        [(ngModel)]="medicamentoId"
+      />
+    </div>
+    <div class="form-group col-md-2">
+      <input
+        type="text"
+        name="cantidad"
+        id="cantidad"
+        placeholder="cantidad"
+        class="form-control"
+        [(ngModel)]="cantidad"
+      />
+    </div>
+  </form>
 
+  <hr />
+  <form class="row">
+    <div class="form-group col-md-2">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        (click)="consultarVenta()"
+      >
+        Consultar Ventas
+      </button>
+    </div>
+    <div class="form-group col-md-2">
+      <input
+        type="text"
+        name="fechaI"
+        id="fechaI"
+        placeholder="Fecha Inicial"
+        class="form-control"
+        [(ngModel)]="fechaI"
+      />
+    </div>
+    <div class="form-group col-md-2">
+      <input
+        type="text"
+        name="fechaF"
+        id="fechaF"
+        placeholder="Fecha Final"
+        class="form-control"
+        [(ngModel)]="fechaF"
+      />
+    </div>
+  </form>
+  <hr />
 
-    <form class="row" (submit)="agregarVenta()">
-      <div class="form-group col-md-2">
-        <button type="submit" class="btn btn-warning" >
-          Agregar
-        </button>
-      </div>
-      <div class="form-group col-md-2">
-        <input
-          type="text"
-          name="medicamentoId"
-          id="medicamentoId"
-          placeholder="medicamentoId"
-          class="form-control"
-          [(ngModel)]="medicamentoId"
-        />
-      </div>
-      <div class="form-group col-md-2">
-        <input
-          type="text"
-          name="cantidad"
-          id="cantidad"
-          placeholder="cantidad"
-          class="form-control"
-          [(ngModel)]="cantidad"
-        />
-      </div>
-    </form>
-    
-    
-
-
-    <hr/>
-    <form class="row">
-      <div class="form-group col-md-2">
-        <button type="submit" class="btn btn-primary" (click)="limpiarYconsultarVenta()">
-          Consultar Ventas
-        </button>
-      </div>
-      <div class="form-group col-md-2">
-        <input
-          type="text"
-          name="fechaI"
-          id="fechaI"
-          placeholder="Fecha Inicial"
-          class="form-control"
-          [(ngModel)]="fechaI"
-        />
-      </div>
-      <div class="form-group col-md-2">
-        <input
-          type="text"
-          name="fechaF"
-          id="fechaF"
-          placeholder="Fecha Final"
-          class="form-control"
-          [(ngModel)]="fechaF"
-        />
-      </div>
-    </form>
-    <hr />
-  
-    <div class="col-7 mt-3" id="ventas">
-      <table class="table table-striped" id="lista">
+  <div class="col-7 mt-3" id="ventas">
+    <table class="table table-striped" id="lista">
+      <thead>
         <tr>
           <th>id</th>
           <th>cantidad</th>
@@ -75,10 +74,32 @@
           <th>Valor Total</th>
           <th>Valor Unitario</th>
           <th>medicamento id</th>
+          <th > Actions </th>
         </tr>
-        <tbody id="tabla-body"></tbody>
-      </table>
-    </div>
-    <div class="col-10 text-right" id="total"></div>
+      </thead>
+      <tbody id="tabla-body">
+        <tr *ngFor="let venta of ventas">
+          <td>{{ venta.id }}</td>
+          <td>{{ venta.cantidad }}</td>
+          <td>{{ venta.fechaHora }}</td>
+          <td>{{ venta["valorTotal"] }}</td>
+          <td>{{ venta["valorUnitario"] }}</td>
+          <td>{{ venta.medicamentos.id }}</td>
+          <td class="mat-actions td-city">
+            
+            <div class="actionsButtons">
+              <button mat-mini-fab color="warn" aria-label="Eliminar" (click)="deleteEmployee(venta)">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-mini-fab color="primary" aria-label="Editar" (click)="openDialog(venta)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+
+  <div class="col-10 text-right" id="total"></div>
+</div>
