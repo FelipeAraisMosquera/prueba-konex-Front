@@ -102,6 +102,25 @@ export class MedicamentosComponent {
 }
   
   
+actualizarMedicamento(){
+  axios.put('http://localhost:8080/venta', 
+  {
+    nombre: this.nombre,
+    laboratorio: this.laboratorio,
+    fechaFabricación: this.fechaFabricación,
+    fechaVencimiento: this.fechaVencimiento,
+    cantidadStock: this.cantidadStock,
+    valorUnitario: this.valorUnitario,
+  }
+)
+  .then((Response: AxiosResponse)=> {
+    console.log(Response.data);
+    this.consultarYBuscarMedicamentos();
+  })
+  .catch((error: any) => {
+    console.log('No Funciona, hay algun error', error);
+  });
+}
 
 openDialogCreate() {
 console.log("entro");
@@ -127,13 +146,13 @@ openDialog(element: any): void {
 
   const config = {
     data: {
-      message: element ? 'Editar Medicamento' : 'Error',
+      message: element ? 'Editar Venta' : 'Error',
       content: element
     }
   };
   const dialogRef = this.dialog.open(EditMedicamentoComponent, config);
   dialogRef.afterClosed().subscribe(result => {
-    this.consultarMedicamento();
+    this.consultarYBuscarMedicamentos();
   });
 }
        

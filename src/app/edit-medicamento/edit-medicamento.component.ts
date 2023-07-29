@@ -22,7 +22,17 @@ export class EditMedicamentoComponent {
   form!: FormGroup;
   cities!: Array<any>;
 
-  
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      nombre: ['', [Validators.required]],
+      laboratorio: ['', Validators.required],
+      fechaFabricacion: ['', Validators.required],
+      fechaVencimiento: ['', Validators.required],
+      cantidadStock: ['', Validators.required],
+      valorUnitario: ['', Validators.required],
+    });
+    this.initValuesForm();
+  }
 
   private initValuesForm(): void {    
     this.form.patchValue({
